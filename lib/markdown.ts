@@ -181,7 +181,7 @@ export type BlogMdxFrontmatter = BaseMdxFrontmatter & {
 
 export async function getAllBlogStaticPaths() {
   try {
-    const blogFolder = path.join(process.cwd(), "/contents/blogs/");
+    const blogFolder = path.join(process.cwd(), "/contents/fluxo/");
     const res = await fs.readdir(blogFolder);
     return res.map((file) => file.split(".")[0]);
   } catch (err) {
@@ -189,12 +189,12 @@ export async function getAllBlogStaticPaths() {
   }
 }
 export async function getAllBlogs() {
-  const blogFolder = path.join(process.cwd(), "/contents/blogs/");
+  const blogFolder = path.join(process.cwd(), "/contents/fluxo/");
   const files = await fs.readdir(blogFolder);
   const uncheckedRes = await Promise.all(
     files.map(async (file) => {
       if (!file.endsWith(".mdx")) return undefined;
-      const filepath = path.join(process.cwd(), `/contents/blogs/${file}`);
+      const filepath = path.join(process.cwd(), `/contents/fluxo/${file}`);
       const rawMdx = await fs.readFile(filepath, "utf-8");
       return {
         ...justGetFrontmatterFromMD<BlogMdxFrontmatter>(rawMdx),
@@ -208,7 +208,7 @@ export async function getAllBlogs() {
 }
 
 export async function getBlogForSlug(slug: string) {
-  const blogFile = path.join(process.cwd(), "/contents/blogs/", `${slug}.mdx`);
+  const blogFile = path.join(process.cwd(), "/contents/fluxo/", `${slug}.mdx`);
   try {
     const rawMdx = await fs.readFile(blogFile, "utf-8");
     return await parseMdx<BlogMdxFrontmatter>(rawMdx);

@@ -42,7 +42,7 @@ function BlogCard({
 }: BlogMdxFrontmatter & { slug: string }) {
   return (
     <Link
-      href={`/blog/${slug}`}
+      href={`/fluxo/${slug}`}
       className="flex flex-col gap-2 items-start border rounded-md py-5 px-3 min-h-[400px]"
     >
       <h3 className="text-md font-semibold -mt-1 pr-7">{title}</h3>

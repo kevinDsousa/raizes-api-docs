@@ -14,8 +14,8 @@ export const NAVLINKS = [
     href: `/docs${page_routes[0].href}`,
   },
   {
-    title: "Blog",
-    href: "/blog",
+    title: "Fluxogramas",
+    href: "/fluxo",
   },
   {
     title: "Exemplos",
