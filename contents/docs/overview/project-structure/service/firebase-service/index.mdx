@@ -1,0 +1,163 @@
+---
+title: FirebaseService
+description: Esta seção descreve o serviço de integração com o Firebase da aplicação, que é responsável por gerenciar usuários e tokens no Firebase.
+---
+
+## Funções do Serviço
+
+### criarUsuarioFirebase
+
+```java
+@Override
+@Transactional
+public UserRecord criarUsuarioFirebase(UsuarioRequestDto dto, Usuario entity)
+```
+
+Este método cria um novo usuário no Firebase ou atualiza um usuário existente.
+
+### findUserByUid
+
+```java
+@Override
+@Transactional
+public UserRecord findUserByUid(String uid)
+```
+
+Este método busca um usuário no Firebase pelo UID.
+
+### emailVerificado
+
+```java
+@Override
+@Transactional
+public void emailVerificado(String uid)
+```
+
+Este método marca o e-mail de um usuário como verificado no Firebase.
+
+### inativarUsuarioFirebase
+
+```java
+@Override
+@Transactional
+public void inativarUsuarioFirebase(String firebaseId)
+```
+
+Este método inativa um usuário no Firebase.
+
+### revogarToken
+
+```java
+@Override
+public void revogarToken(String uid)
+```
+
+Este método revoga o token de um usuário no Firebase.
+
+### atualizarContatoUsuarioFirebase
+
+```java
+@Override
+public void atualizarContatoUsuarioFirebase(String uid, ContatoUpdateRequestDto requestDto, boolean usuarioPossuiEmail)
+```
+
+Este método atualiza o contato de um usuário no Firebase.
+
+### verificarToken
+
+```java
+@Override
+public FirebaseToken verificarToken(String idToken)
+```
+
+Este método verifica a validade de um token do Firebase.
+
+### atualizarSenha
+
+```java
+@Override
+@Transactional
+public void atualizarSenha(String firebaseUID, String senha, boolean ativarUsuario)
+```
+
+Este método atualiza a senha de um usuário no Firebase.
+
+### createFirebaseUserRequest
+
+```java
+protected UserRecord.CreateRequest createFirebaseUserRequest(UsuarioRequestDto dto, String nome)
+```
+
+Este método cria uma solicitação para criar um novo usuário no Firebase.
+
+### setEmail
+
+```java
+protected void setEmail(ContatoRequestDto contato, UserRecord.CreateRequest request)
+```
+
+Este método define o e-mail de um usuário no Firebase.
+
+### setEmail
+
+```java
+protected void setEmail(ContatoUpdateRequestDto contato, UserRecord.UpdateRequest request, boolean usuarioPossuiEmail)
+```
+
+Este método define o e-mail de um usuário no Firebase durante a atualização.
+
+### atualizarDadosPessoaisUsuarioFirebase
+
+```java
+protected void atualizarDadosPessoaisUsuarioFirebase(String uid, String nome, Collection<? extends GrantedAuthority> permissoes)
+```
+
+Este método atualiza os dados pessoais de um usuário no Firebase.
+
+### buscarUsuarioExistente
+
+```java
+protected UserRecord buscarUsuarioExistente(String email, String numeroWhatsapp)
+```
+
+Este método busca um usuário existente no Firebase pelo e-mail ou número de WhatsApp.
+
+### buscarUsuarioPorEmail
+
+```java
+protected UserRecord buscarUsuarioPorEmail(String email)
+```
+
+Este método busca um usuário no Firebase pelo e-mail.
+
+### buscarUsuarioPorNumeroWhatsapp
+
+```java
+protected UserRecord buscarUsuarioPorNumeroWhatsapp(String numeroWhatsapp)
+```
+
+Este método busca um usuário no Firebase pelo número de WhatsApp.
+
+### criarNovoUsuario
+
+```java
+protected UserRecord criarNovoUsuario(UsuarioRequestDto dto, String nome, Collection<? extends GrantedAuthority> permissoes)
+```
+
+Este método cria um novo usuário no Firebase.
+
+### atualizarUsuarioFirebase
+
+```java
+protected void atualizarUsuarioFirebase(String uid, ContatoUpdateRequestDto requestDto, String nome, Collection<? extends GrantedAuthority> permissoes)
+```
+
+Este método atualiza um usuário existente no Firebase.
+
+### getClaimsTokenPermissoes
+
+```java
+protected HashMap<String, Object> getClaimsTokenPermissoes(Collection<? extends GrantedAuthority> permissoes)
+```
+
+Este método obtém as permissões do token de um usuário no Firebase.

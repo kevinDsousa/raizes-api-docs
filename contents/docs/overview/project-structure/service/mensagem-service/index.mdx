@@ -1,0 +1,16 @@
+---
+title: MensagemService
+description: Esta seção descreve o serviço de envio de mensagens da aplicação, que é responsável por gerenciar o envio de mensagens para os usuários.
+---
+
+## Funções do Serviço
+
+### enviarWhatsapp
+
+```java
+@Override
+@Transactional
+public void enviarWhatsapp(DadosMensagemDto dadosMensagemDto)
+```
+
+Este método envia uma mensagem WhatsApp utilizando os dados fornecidos.

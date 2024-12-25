@@ -1,0 +1,41 @@
+---
+title: CodigoVerificacaoService
+description: Esta seção descreve o serviço de verificação de código da aplicação, que é responsável por gerenciar os códigos de verificação enviados aos usuários.
+---
+
+## Funções do Serviço
+
+### save
+
+```java
+@Transactional
+@Override
+public CodigoVerificacao save(TipoCodigoVerificacao tipo, Usuario usuario)
+```
+
+Este método salva um novo código de verificação para o usuário.
+
+### gerarCodigoVerificacaoContato
+
+```java
+private String gerarCodigoVerificacaoContato()
+```
+
+Este método gera um código de verificação para contato.
+
+### gerarCodigoVerificacaoSenha
+
+```java
+private String gerarCodigoVerificacaoSenha(LocalDateTime dataCadastroUsuario)
+```
+
+Este método gera um código de verificação para senha baseado na data de cadastro do usuário.
+
+### validarCodigoConfirmacao
+
+```java
+@Override
+public void validarCodigoConfirmacao(Usuario usuario, String codigo)
+```
+
+Este método valida o código de confirmação fornecido pelo usuário.

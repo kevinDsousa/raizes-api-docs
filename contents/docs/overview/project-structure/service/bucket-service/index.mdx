@@ -1,0 +1,34 @@
+---
+title: BucketService
+description: Esta seção descreve o serviço de armazenamento de arquivos da aplicação, que é responsável por gerenciar os arquivos enviados pelos usuários.
+---
+
+## Funções do Serviço
+
+### upload
+
+```java
+@Override
+@Transactional
+public void upload(AnexoRequestDto dto, UUID anexoId)
+```
+
+Este método realiza o upload de um arquivo para o bucket do Minio.
+
+### deletarArquivos
+
+```java
+@Override
+@Transactional
+public void deletarArquivos(List<Anexo> anexos)
+```
+
+Este método deleta uma lista de arquivos do bucket do Minio.
+
+### deletarArquivo
+
+```java
+protected void deletarArquivo(Anexo anexo)
+```
+
+Este método deleta um arquivo específico do bucket do Minio.

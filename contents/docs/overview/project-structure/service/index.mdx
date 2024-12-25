@@ -1,0 +1,19 @@
+---
+title: Service
+description: Esta seção descreve os serviços da aplicação, que são responsáveis por implementar a lógica de negócios e fornecer funcionalidades específicas para os controladores.
+---
+
+## Visão Geral  
+
+Os **serviços** são responsáveis por implementar a lógica de negócios e fornecer funcionalidades específicas para os controladores. Eles encapsulam a lógica de processamento de dados e interagem com o repositório de dados para realizar operações de leitura e gravação. Os serviços são uma parte essencial da arquitetura de uma aplicação baseada em serviços, pois garantem a separação clara entre a camada de controle e a camada de persistência.
+
+## Estrutura Padrão
+
+A estrutura padrão de um serviço em uma aplicação Spring Boot geralmente segue o seguinte padrão:
+
+1. **Anotações**: O serviço é anotado com `@Service` para indicar que ele é um componente de serviço.
+2. **Injeção de Dependências**: Os repositórios e outros serviços necessários são injetados no serviço usando a anotação `@Autowired`.
+3. **Métodos de Negócio**: O serviço contém métodos que implementam a lógica de negócios e interagem com os repositórios para realizar operações de leitura e gravação.
+
+<Outlet path="/project-structure/controller" />
+

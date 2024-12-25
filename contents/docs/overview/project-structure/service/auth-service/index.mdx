@@ -1,0 +1,139 @@
+---
+title: AuthService
+description: O serviço de autenticação é responsável por implementar a lógica de negócios relacionada à autenticação e autorização de usuários.
+---
+
+## Funções do Serviço
+
+### login
+
+```java
+@Transactional(readOnly = true)
+@Override
+public FirebaseLoginResponseDto login(LoginRequestDto request)
+```
+
+Este método realiza o login de um usuário utilizando as credenciais fornecidas.
+
+### loginSocial
+
+```java
+@Transactional(readOnly = true)
+@Override
+public void loginSocial(LoginSocialRequestDto request)
+```
+
+Este método realiza o login social de um usuário utilizando o UID do Firebase.
+
+### verificarToken
+
+```java
+@Transactional(readOnly = true)
+@Override
+public FirebaseToken verificarToken(String idToken)
+```
+
+Este método verifica a validade de um token do Firebase.
+
+### atualizarToken
+
+```java
+@Override
+public RefreshTokenResponseDto atualizarToken(RefreshTokenRequestDto refreshTokenRequestDto)
+```
+
+Este método atualiza o token de autenticação de um usuário.
+
+### verificarUsuarioValido
+
+```java
+@Transactional(readOnly = true)
+@Override
+public void verificarUsuarioValido(Usuario usuario)
+```
+
+Este método verifica se um usuário aceitou os termos de uso.
+
+### enviarCodigoRecuperacaoSenha
+
+```java
+@Transactional
+@Override
+public void enviarCodigoRecuperacaoSenha(String login)
+```
+
+Este método envia um código de recuperação de senha para o usuário.
+
+### redefinirSenha
+
+```java
+@Transactional
+@Override
+public void redefinirSenha(String login, SenhaRequestDto request)
+```
+
+Este método redefine a senha de um usuário.
+
+### alterarSenha
+
+```java
+@Transactional
+@Override
+public void alterarSenha(String login, SenhaUpdateRequestDto request)
+```
+
+Este método altera a senha de um usuário.
+
+### invalidarCodigoSenha
+
+```java
+@Transactional
+@Override
+public void invalidarCodigoSenha(String login)
+```
+
+Este método invalida o código de recuperação de senha de um usuário.
+
+### logout
+
+```java
+@Transactional
+@Override
+public void logout()
+```
+
+Este método realiza o logout do usuário.
+
+### loadUserByUsername
+
+```java
+@Transactional(readOnly = true)
+@Override
+public UserDetails loadUserByUsername(String uid)
+```
+
+Este método carrega os detalhes do usuário pelo UID do Firebase.
+
+### firebaseLogin
+
+```java
+protected FirebaseLoginResponseDto firebaseLogin(FirebaseLoginRequestDto request)
+```
+
+Este método realiza o login no Firebase utilizando as credenciais fornecidas.
+
+### checkPassword
+
+```java
+protected void checkPassword(FirebaseLoginRequestDto request)
+```
+
+Este método verifica a senha do usuário no Firebase.
+
+### refreshTokenRequest
+
+```java
+protected RefreshTokenResponseDto refreshTokenRequest(RefreshTokenRequestDto request)
+```
+
+Este método realiza a solicitação de atualização do token no Firebase.

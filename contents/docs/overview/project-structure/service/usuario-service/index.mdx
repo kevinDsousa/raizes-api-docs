@@ -1,0 +1,218 @@
+---
+title: UsuarioService
+description: Esta seção descreve o serviço de gerenciamento de usuários da aplicação, que é responsável por gerenciar as operações relacionadas aos usuários.
+---
+
+## Funções do Serviço
+
+### save
+
+```java
+@Transactional
+@Override
+public void save(UsuarioRequestDto request)
+```
+
+Este método salva um novo usuário na aplicação.
+
+### uploadAnexos
+
+```java
+@Transactional
+@Override
+public void uploadAnexos(String login, List<TipoDocumento> tipoDocumentos, List<MultipartFile> arquivos)
+```
+
+Este método faz o upload de anexos para um usuário.
+
+### findById
+
+```java
+@Override
+public Usuario findById(UUID id)
+```
+
+Este método busca um usuário pelo ID.
+
+### findByLogin
+
+```java
+@Override
+public Usuario findByLogin(String login)
+```
+
+Este método busca um usuário pelo login.
+
+### findByLoginAtivo
+
+```java
+@Override
+public Usuario findByLoginAtivo(String login)
+```
+
+Este método busca um usuário ativo pelo login.
+
+### findByFirebaseUID
+
+```java
+@Override
+public Usuario findByFirebaseUID(String uid)
+```
+
+Este método busca um usuário pelo UID do Firebase.
+
+### validarCodigo
+
+```java
+@Transactional
+@Override
+public void validarCodigo(String login, String codigo)
+```
+
+Este método valida um código de verificação para um usuário.
+
+### reenviarCodigo
+
+```java
+@Transactional
+@Override
+public void reenviarCodigo(String login)
+```
+
+Este método reenvia um código de verificação para um usuário.
+
+### delete
+
+```java
+@Transactional
+@Override
+public void delete(UUID id)
+```
+
+Este método deleta um usuário pelo ID.
+
+### alterarContato
+
+```java
+@Transactional
+@Override
+public void alterarContato(String login, ContatoUpdateRequestDto request)
+```
+
+Este método altera o contato de um usuário.
+
+### criarSenha
+
+```java
+@Transactional
+@Override
+public void criarSenha(String login, SenhaRequestDto request)
+```
+
+Este método cria uma nova senha para um usuário.
+
+### redefinirSenha
+
+```java
+@Transactional
+@Override
+public void redefinirSenha(String login, String senha)
+```
+
+Este método redefine a senha de um usuário.
+
+### verificarValidacaoCodigo
+
+```java
+@Override
+public void verificarValidacaoCodigo(Usuario usuario)
+```
+
+Este método verifica a validação do código de verificação de um usuário.
+
+### verificarAceiteTermos
+
+```java
+@Override
+public void verificarAceiteTermos(Usuario usuario)
+```
+
+Este método verifica se um usuário aceitou os termos de uso.
+
+### enviarCodigoRecuperacaoSenha
+
+```java
+@Transactional
+@Override
+public void enviarCodigoRecuperacaoSenha(Usuario usuario)
+```
+
+Este método envia um código de recuperação de senha para um usuário.
+
+### getTipoUsuario
+
+```java
+@Override
+public TipoPerfilResponseDto getTipoUsuario()
+```
+
+Este método retorna os tipos de perfil de usuário disponíveis.
+
+### aceitarTermos
+
+```java
+@Override
+@Transactional
+public void aceitarTermos()
+```
+
+Este método registra a aceitação dos termos de uso por um usuário.
+
+### usuarioExistenteByLogin
+
+```java
+@Transactional(readOnly = true)
+@Override
+public UsuarioExistenteResponseDto usuarioExistenteByLogin(String login)
+```
+
+Este método verifica se um usuário existe pelo login.
+
+### situacaoCadastroByLogin
+
+```java
+@Transactional(readOnly = true)
+@Override
+public SituacaoCadastroUsuarioResponseDto situacaoCadastroByLogin(String login)
+```
+
+Este método verifica a situação do cadastro de um usuário pelo login.
+
+### inativarUsuarioFirebase
+
+```java
+@Transactional
+@Override
+public void inativarUsuarioFirebase(String firebaseId)
+```
+
+Este método inativa um usuário no Firebase pelo UID.
+
+### validarUsuarioCadastradoNoBanco
+
+```java
+@Override
+public Boolean validarUsuarioCadastradoNoBanco(String email)
+```
+
+Este método valida se um usuário está cadastrado no banco de dados pelo e-mail.
+
+### invalidarCodigoSenha
+
+```java
+@Transactional
+@Override
+public void invalidarCodigoSenha(String login)
+```
+
+Este método invalida o código de recuperação de senha de um usuário.
