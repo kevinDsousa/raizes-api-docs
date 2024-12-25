@@ -1,9 +1,18 @@
 ---
 title: Controller
-description: This section provides an overview of the custom components available in AriaDocs.
+description: Esta seção descreve os controladores da aplicação, que são responsáveis por gerenciar as requisições HTTP e fornecer uma interface RESTful para as funcionalidades do sistema.
 ---
 
-Explore the custom components we've defined for easy integration and development within your projects. Each component is designed to enhance your workflow and streamline your development process.
+## Visão Geral
 
+Os **controladores** são responsáveis por gerenciar as requisições HTTP e fornecer uma interface RESTful para as funcionalidades do sistema. Eles recebem as solicitações dos clientes, processam as informações necessárias e retornam as respostas apropriadas. Os controladores são uma parte essencial da arquitetura de uma aplicação baseada em serviços, pois garantem a separação clara entre a camada de apresentação e a lógica de negócios.
+
+## Estrutura Padrão
+
+A estrutura padrão de um controlador em uma aplicação Spring Boot geralmente segue o seguinte padrão:
+
+1. **Anotações**: O controlador é anotado com `@RestController` para indicar que ele é um controlador REST.
+2. **Mapeamento de Endpoints**: Os métodos do controlador são mapeados para endpoints específicos usando a anotação `@RequestMapping` ou anotações mais específicas, como `@GetMapping`, `@PostMapping`, `@PutMapping` e `@DeleteMapping`.
+3. **Corpo do Método**: O corpo do método do controlador contém a lógica para processar a solicitação e gerar a resposta apropriada.
 
 <Outlet path="/getting-started/components" />

@@ -1,6 +1,122 @@
 ---
-title: Components
-description: This section provides an overview of the custom components available in AriaDocs.
+title: UsuarioController
+description: O controlador de usuário é responsável por gerenciar as requisições HTTP relacionadas à entidade de usuário.
 ---
 
-d
+## Visão Geral
+
+O **UsuarioController** gerencia as operações relacionadas à entidade de usuário, fornecendo uma interface RESTful para funcionalidades como criação, alteração de senha, upload de documentos, validação de código, consulta de status, entre outras. Ele utiliza o **UsuarioService** para encapsular a lógica de negócios e garantir uma separação clara entre a camada de apresentação e a camada de serviços.
+
+---
+
+## Endpoints Disponíveis
+
+### 1. Criar Usuário
+- **Endpoint**: `POST /usuario`
+- **Descrição**: Cria um novo usuário.
+- **Status HTTP**: `201 CREATED`
+- **Corpo da Requisição**: `UsuarioRequestDto`
+- **Resposta**: Mensagem de sucesso.
+
+---
+
+### 2. Consultar Existência de Usuário
+- **Endpoint**: `GET /usuario/{login}`
+- **Descrição**: Verifica se um usuário existe pelo login.
+- **Status HTTP**: `200 OK`
+- **Resposta**: Informações sobre a existência do usuário.
+
+---
+
+### 3. Consultar Situação do Cadastro
+- **Endpoint**: `GET /usuario/situacao-cadastro/{login}`
+- **Descrição**: Retorna a situação do cadastro de um usuário.
+- **Status HTTP**: `200 OK`
+
+---
+
+### 4. Criar Senha
+- **Endpoint**: `PATCH /usuario/criar-senha/{login}`
+- **Descrição**: Permite que o usuário crie uma senha.
+- **Status HTTP**: `200 OK`
+- **Corpo da Requisição**: `SenhaRequestDto`
+
+---
+
+### 5. Upload de Documentos
+- **Endpoint**: `POST /usuario/upload/{login}`
+- **Descrição**: Faz upload de anexos/documentos relacionados ao usuário.
+- **Status HTTP**: `201 CREATED`
+- **Parâmetros**:
+  - `tipoDocumento`: Lista de tipos de documentos.
+  - `arquivo`: Lista de arquivos.
+
+---
+
+### 6. Reenviar Código
+- **Endpoint**: `POST /usuario/reenviar-codigo/{login}`
+- **Descrição**: Reenvia o código de validação.
+- **Status HTTP**: `201 CREATED`
+
+---
+
+### 7. Validar Código
+- **Endpoint**: `PATCH /usuario/validacao-codigo/{login}`
+- **Descrição**: Valida um código enviado ao usuário.
+- **Status HTTP**: `200 OK`
+- **Corpo da Requisição**: `CodigoRequestDto`
+
+---
+
+### 8. Alterar Contato
+- **Endpoint**: `PATCH /usuario/alterar-contato/{login}`
+- **Descrição**: Atualiza informações de contato do usuário.
+- **Status HTTP**: `200 OK`
+- **Corpo da Requisição**: `ContatoUpdateRequestDto`
+
+---
+
+### 9. Excluir Usuário
+- **Endpoint**: `DELETE /usuario/{id}`
+- **Descrição**: Exclui um usuário pelo ID.
+- **Status HTTP**: `204 NO CONTENT`
+
+---
+
+### 10. Consultar Tipo de Usuário
+- **Endpoint**: `GET /usuario/perfil/tipo`
+- **Descrição**: Retorna o tipo de perfil do usuário.
+- **Status HTTP**: `200 OK`
+
+---
+
+### 11. Aceitar Termos de Condição
+- **Endpoint**: `PATCH /usuario/aceitar-termos`
+- **Descrição**: Marca os termos e condições como aceitos pelo usuário.
+- **Status HTTP**: `202 ACCEPTED`
+
+---
+
+### 12. Inativar Usuário Firebase
+- **Endpoint**: `DELETE /usuario/inativar-firebase/{uid}`
+- **Descrição**: Inativa o usuário no Firebase.
+- **Status HTTP**: `204 NO CONTENT`
+
+---
+
+### 13. Validar Usuário por Email
+- **Endpoint**: `GET /usuario/validar-usuario-cadastrado/{email}`
+- **Descrição**: Valida se um usuário está cadastrado no banco de dados pelo email.
+- **Status HTTP**: `200 OK`
+
+---
+
+## Benefícios
+
+- **Organização**: Segue o padrão REST para endpoints bem definidos.
+- **Validação**: Utiliza DTOs e validação (@Valid) para garantir integridade nos dados recebidos.
+- **Reutilização de Serviço**: Centraliza a lógica de negócios no `UsuarioService`, mantendo o controller focado na manipulação de requisições e respostas.
+
+---
+
+Este controlador é essencial para gerenciar as operações relacionadas à entidade de usuário, garantindo uma interface consistente e segura.

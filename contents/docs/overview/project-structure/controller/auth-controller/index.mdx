@@ -1,6 +1,96 @@
 ---
-title: Components
-description: This section provides an overview of the custom components available in AriaDocs.
+title: AuthController
+description: O controlador de autenticação é responsável por gerenciar as requisições HTTP relacionadas à autenticação e autorização de usuários.
 ---
 
-d
+## Visão Geral
+
+O **AuthController** gerencia as operações relacionadas à autenticação e autorização de usuários, fornecendo uma interface RESTful para funcionalidades como login, logout, recuperação de senha, validação de token, entre outras. Ele utiliza o **AuthService** para encapsular a lógica de negócios e garantir uma separação clara entre a camada de apresentação e a camada de serviços.
+
+---
+
+## Endpoints Disponíveis
+
+### 1. Login
+- **Endpoint**: `POST /auth/login`
+- **Descrição**: Realiza a autenticação do usuário.
+- **Status HTTP**: `201 CREATED`
+- **Corpo da Requisição**: `LoginRequestDto`
+- **Resposta**: `FirebaseLoginResponseDto`
+
+---
+
+### 2. Login Social
+- **Endpoint**: `POST /auth/login-social`
+- **Descrição**: Realiza o login de um usuário utilizando um provedor de login social (ex.: Google, Facebook).
+- **Status HTTP**: `204 NO CONTENT`
+- **Corpo da Requisição**: `LoginSocialRequestDto`
+- **Resposta**: `FirebaseLoginResponseDto`
+
+---
+
+### 3. Atualizar Token
+- **Endpoint**: `POST /auth/atualizar-token`
+- **Descrição**: Atualiza o token de autenticação de um usuário.
+- **Status HTTP**: `201 CREATED`
+- **Corpo da Requisição**: `RefreshTokenRequestDto`
+- **Resposta**: `RefreshTokenResponseDto`
+
+---
+
+### 4. Recuperar Senha
+- **Endpoint**: `POST /auth/recuperar-senha/{login}`
+- **Descrição**: Envia um código para o usuário para recuperação de senha.
+- **Status HTTP**: `201 CREATED`
+- **Parâmetros**: 
+  - `login`: O login do usuário que solicita a recuperação de senha.
+
+---
+
+### 5. Redefinir Senha
+- **Endpoint**: `PATCH /auth/redefinir-senha/{login}`
+- **Descrição**: Redefine a senha do usuário.
+- **Status HTTP**: `200 OK`
+- **Corpo da Requisição**: `SenhaRequestDto`
+- **Parâmetros**: 
+  - `login`: O login do usuário que deseja redefinir a senha.
+
+---
+
+### 6. Alterar Senha
+- **Endpoint**: `PATCH /auth/alterar-senha/{login}`
+- **Descrição**: Permite ao usuário alterar sua senha com autenticação via JWT.
+- **Status HTTP**: `200 OK`
+- **Corpo da Requisição**: `SenhaUpdateRequestDto`
+- **Parâmetros**:
+  - `login`: O login do usuário que deseja alterar a senha.
+
+---
+
+### 7. Invalidar Código de Senha
+- **Endpoint**: `DELETE /auth/invalidar-codigo-senha/{login}`
+- **Descrição**: Invalida o código de recuperação de senha enviado ao usuário.
+- **Status HTTP**: `204 NO CONTENT`
+- **Parâmetros**: 
+  - `login`: O login do usuário cujo código de recuperação será invalidado.
+
+---
+
+### 8. Logout
+- **Endpoint**: `POST /auth/logout`
+- **Descrição**: Realiza o logout do usuário.
+- **Status HTTP**: `204 NO CONTENT`
+
+---
+
+## Benefícios
+
+- **Segurança**: Utiliza JWT (JSON Web Token) para proteger rotas e sessões de autenticação.
+- **Flexibilidade**: Suporta login tradicional e login social através de provedores como Google e Facebook.
+- **Recuperação e Alteração de Senha**: Permite recuperação e alteração de senha de forma segura com códigos de recuperação e validações.
+- **Gestão de Tokens**: Oferece endpoints para a atualização de tokens e controle de sessões de autenticação.
+- **Interface Simples**: Fornece uma interface RESTful para facilitar a integração com sistemas externos.
+
+---
+
+Este controlador é fundamental para o gerenciamento de autenticação e autorização de usuários, garantindo um fluxo seguro de login, gerenciamento de senha e controle de sessões com tokens.
