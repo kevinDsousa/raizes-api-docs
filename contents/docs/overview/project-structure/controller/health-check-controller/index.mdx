@@ -1,0 +1,66 @@
+---
+title: Health Check Controller
+description: Este endpoint permite verificar se a aplicação está funcionando corretamente e mostra sua versão.
+---
+
+# Health Check Controller
+
+## Visão Geral
+
+O **Health Check Controller** é responsável por fornecer um endpoint simples que permite verificar o status da aplicação. Este recurso é útil para monitoramento e validação rápida, garantindo que a aplicação esteja ativa e respondendo a solicitações.
+
+---
+
+## Implementação
+
+### Endpoint: `/health-check`
+
+- **Método HTTP**: `GET`
+- **Descrição**: Retorna uma resposta indicando que a aplicação está funcionando corretamente, juntamente com a versão atual da API.
+- **Resposta**:
+  - **Status HTTP**: `200 OK`
+  - **Corpo**: `"OK! - v0.0.1"`
+
+---
+
+### Código-Fonte
+
+Abaixo está a implementação do controller:
+
+```java
+@RestController
+@RequestMapping(value = "health-check")
+public class HealthCheckControllerImpl implements HealthCheckController {
+  @Override
+  @GetMapping()
+  public ResponseEntity<?> healthCheck() {
+    return ResponseEntity.status(HttpStatus.OK).body("OK! - v0.0.1");
+  }
+}
+```
+
+## Como Utilizar
+
+### Chamando o Endpoint
+
+Para verificar o status da aplicação, envie uma requisição `GET` para o seguinte endpoint:
+
+`GET /health-check`
+
+### Exemplo de Resposta
+
+```json
+{
+  "status": "OK",
+  "version": "v0.0.1"
+}
+```
+
+### Benefícios
+
+- Monitoramento Simples: Permite a integração com ferramentas de monitoramento para verificar a saúde da aplicação.
+- Rápida Verificação: Útil para validar se a aplicação está ativa após a implantação.
+- Indicação de Versão: Inclui a versão atual da aplicação para facilitar o rastreamento.
+
+Com este controller, você pode garantir uma verificação simples e eficaz do estado da aplicação.
+

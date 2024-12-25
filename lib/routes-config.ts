@@ -9,8 +9,8 @@ export type EachRoute = {
 
 export const ROUTES: EachRoute[] = [
   {
-    title: "Getting Started",
-    href: "/getting-started",
+    title: "Overview do projeto",
+    href: "/overview",
     noLink: true,
     items: [
       { title: "Introdução", href: "/introduction" },
@@ -18,28 +18,36 @@ export const ROUTES: EachRoute[] = [
         title: "Inicialização",
         href: "/initialization",
       },
-      { title: "Quick Start Guide", href: "/quick-start-guide" },
       {
-        title: "Project Structure",
+        title: "Estrutura do projeto",
         href: "/project-structure",
-      },
-      {
-        title: "Components",
-        href: "/components",
         items: [
-          { title: "Stepper", href: "/stepper" },
-          { title: "Tabs", href: "/tabs" },
-          { title: "Note", href: "/note" },
-          { title: "Code Block", href: "/code-block" },
-          { title: "Image & Link", href: "/image-link" },
-          { title: "Custom", href: "/custom" },
+          {
+            title: "controllers",
+            href: "/controller",
+            items: [
+              { title: "HealthCheckController", href: "/health-check-controller" },
+              { title: "TermoCondicaoController", href: "/termo-condicao-controller" },
+              { title: "UsuarioController", href: "/usuario-controller" },
+              { title: "AuthController", href: "/auth-controller" },
+            ]
+          },
+          { title: "services", href: "/service" },
+          { title: "entities", href: "/entity" },
         ],
       },
-      { title: "Themes", href: "/themes" },
       {
-        title: "Customize",
-        href: "/customize",
+        title: "Configuração",
+        href: "/configuration",
+        items: [
+          { title: "Configuração do banco de dados", href: "/database-configuration" },
+          { title: "Configuração do servidor", href: "/server-configuration" },
+        ],
       },
+      {
+        title: "Contribuidores",
+        href: "/contributors",
+      }
     ],
   },
 ];
