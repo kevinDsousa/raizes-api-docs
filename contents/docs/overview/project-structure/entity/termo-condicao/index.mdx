@@ -1,0 +1,53 @@
+---
+title: TermoCondicao
+description: Esta seção descreve a entidade TermoCondicao, que representa os termos e condições da aplicação.
+---
+
+## Estrutura da Entidade
+
+A entidade **TermoCondicao** representa os termos e condições da aplicação. Ela contém informações como a versão e o conteúdo dos termos e condições, além dos usuários que aceitaram os termos.
+
+### Anotações
+
+- `@Getter` e `@Setter`: Geram automaticamente os métodos getters e setters para os campos da entidade.
+- `@Entity`: Indica que a classe é uma entidade JPA.
+- `@Table(name = "termo_condicao")`: Especifica o nome da tabela no banco de dados.
+- `@NoArgsConstructor`: Gera um construtor sem argumentos.
+
+### Campos
+
+- `id`: Identificador único dos termos e condições.
+- `versao`: Versão dos termos e condições.
+- `conteudo`: Conteúdo dos termos e condições.
+- `usuarios`: Lista de usuários que aceitaram os termos e condições.
+
+### Relacionamentos
+
+- `@OneToMany(mappedBy = "termo")`: Define um relacionamento um-para-muitos com a entidade `Usuario`.
+
+### Exemplo de Código
+
+```java
+@Getter
+@Setter
+@Entity
+@NoArgsConstructor
+@Table(name = "termo_condicao")
+public class TermoCondicao extends BaseAuditoria {
+  @Serial
+  private static final long serialVersionUID = -13935003319858381L;
+
+  @Id
+  @GeneratedValue
+  @Column(name = "id")
+  private UUID id;
+
+  @Column(name = "versao")
+  private String versao;
+
+  @Column(name = "conteudo")
+  private String conteudo;
+
+  @OneToMany(mappedBy = "termo")
+  private List<Usuario> usuarios;
+}

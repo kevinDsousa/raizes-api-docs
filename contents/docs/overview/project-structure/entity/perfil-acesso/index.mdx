@@ -1,0 +1,34 @@
+---
+title: PerfilAcesso
+description: Esta seção descreve a entidade PerfilAcesso, que representa um perfil de acesso no sistema.
+---
+
+## Estrutura da Entidade
+
+A entidade **PerfilAcesso** representa um perfil de acesso no sistema. Ela contém informações como o nome do perfil e as permissões associadas.
+
+### Anotações
+
+- `@Getter` e `@Setter`: Geram automaticamente os métodos getters e setters para os campos da entidade.
+- `@Entity`: Indica que a classe é uma entidade JPA.
+- `@Table(name = "perfil_acesso")`: Especifica o nome da tabela no banco de dados.
+- `@Audited` e `@AuditTable("perfil_acesso_aud")`: Habilitam a auditoria para a entidade e especificam o nome da tabela de auditoria.
+
+### Campos
+
+- `id`: Identificador único do perfil de acesso.
+- `nome`: Nome do perfil de acesso.
+- `permissoes`: Conjunto de permissões associadas ao perfil de acesso.
+
+### Métodos
+
+#### toStringMapper
+
+```java
+public String toStringMapper() throws JsonProcessingException {
+  ObjectMapper objectMapper = new ObjectMapper();
+  return objectMapper.writeValueAsString(this);
+}
+```
+
+Este método converte o objeto `PerfilAcesso` em uma string JSON.

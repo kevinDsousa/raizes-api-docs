@@ -1,0 +1,47 @@
+---
+title: Endereco
+description: Esta seção descreve a entidade Endereco, que representa as informações de endereço de um usuário no sistema.
+---
+
+## Estrutura da Entidade
+
+A entidade **Endereco** representa as informações de endereço de um usuário no sistema. Ela contém informações como CEP, município, localidade, logradouro, número, complemento, bairro, UF e ponto de referência.
+
+### Anotações
+
+- `@Getter` e `@Setter`: Geram automaticamente os métodos getters e setters para os campos da entidade.
+- `@Entity`: Indica que a classe é uma entidade JPA.
+- `@Table(name = "endereco")`: Especifica o nome da tabela no banco de dados.
+- `@Audited` e `@AuditTable("endereco_aud")`: Habilitam a auditoria para a entidade e especificam o nome da tabela de auditoria.
+- `@NoArgsConstructor`: Gera um construtor sem argumentos.
+
+### Campos
+
+- `id`: Identificador único do endereço.
+- `cep`: CEP do endereço.
+- `municipio`: Município do endereço.
+- `localidade`: Localidade do endereço.
+- `logradouro`: Logradouro do endereço.
+- `numero`: Número do endereço.
+- `complemento`: Complemento do endereço.
+- `bairro`: Bairro do endereço.
+- `uf`: Unidade Federativa (UF) do endereço.
+- `pontoReferencia`: Ponto de referência do endereço.
+
+### Construtor
+
+```java
+public Endereco(EnderecoRequestDto request) {
+  cep = request.getCep();
+  municipio = request.getMunicipio();
+  localidade = request.getLocalidade();
+  logradouro = request.getLogradouro();
+  numero = request.getNumero();
+  complemento = request.getComplemento();
+  bairro = request.getBairro();
+  uf = request.getUf();
+  pontoReferencia = request.getPontoReferencia();
+}
+```
+
+Este construtor inicializa um objeto `Endereco` com base nos dados fornecidos em um `EnderecoRequestDto`.

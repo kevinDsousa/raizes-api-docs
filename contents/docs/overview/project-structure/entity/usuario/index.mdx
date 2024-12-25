@@ -1,0 +1,92 @@
+---
+title: Usuario
+description: Esta seção descreve a entidade Usuario, que representa um usuário no sistema.
+---
+
+## Estrutura da Entidade
+
+A entidade **Usuario** representa um usuário no sistema. Ela contém informações como login, tipo de perfil, UID do Firebase, status de atividade, código de verificação, data de aceitação dos termos, data de inativação, perfil da pessoa, termos e condições, e perfis de acesso.
+
+### Anotações
+
+- `@Getter` e `@Setter`: Geram automaticamente os métodos getters e setters para os campos da entidade.
+- `@Entity`: Indica que a classe é uma entidade JPA.
+- `@Table(name = "usuario")`: Especifica o nome da tabela no banco de dados.
+- `@Audited` e `@AuditTable("usuario_aud")`: Habilitam a auditoria para a entidade e especificam o nome da tabela de auditoria.
+- `@NoArgsConstructor`: Gera um construtor sem argumentos.
+- `@JsonIgnore`: Ignora a serialização de campos específicos.
+- `@JsonDeserialize` e `@JsonSerialize`: Especificam os deserializadores e serializadores para os campos de data.
+
+### Campos
+
+- `id`: Identificador único do usuário.
+- `login`: Login do usuário.
+- `tipoPerfil`: Tipo de perfil do usuário (enum `TipoPerfil`).
+- `firebaseUID`: UID do Firebase do usuário.
+- `isAtivo`: Indica se o usuário está ativo.
+- `codigoVerificacao`: Código de verificação associado ao usuário.
+- `dataAceiteTermo`: Data de aceitação dos termos pelo usuário.
+- `dataInativacao`: Data de inativação do usuário.
+- `pessoaPerfil`: Perfil da pessoa associado ao usuário.
+- `termo`: Termos e condições aceitos pelo usuário.
+- `perfisAcessos`: Conjunto de perfis de acesso associados ao usuário.
+
+### Construtor
+
+```java
+public Usuario(UsuarioRequestDto request) {
+  login = request.getLogin();
+  tipoPerfil = request.getTipoPerfil();
+}
+```
+
+Este construtor inicializa um objeto `Usuario` com base nos dados fornecidos em um `UsuarioRequestDto`.
+
+### Métodos
+
+#### possuiPermissao
+
+```java
+public boolean possuiPermissao(String permissao) {
+  return getAuthorities().stream().anyMatch(authority -> authority.getAuthority().equals(permissao));
+}
+```
+
+Este método verifica se o usuário possui uma determinada permissão.
+
+#### isAdmin
+
+```java
+@JsonIgnore
+public boolean isAdmin() {
+  return TipoPerfil.ADMINISTRADOR.equals(tipoPerfil);
+}
+```
+
+Este método verifica se o usuário é um administrador.
+
+#### getAuthorities
+
+```java
+@JsonIgnore
+@Override
+public Collection<? extends GrantedAuthority> getAuthorities() {
+  return PermissoesUtils.getPermissoes(perfisAcessos);
+}
+```
+
+Este método retorna as autoridades (permissões) do usuário.
+
+#### toStringMapper
+
+```java
+public String toStringMapper() throws JsonProcessingException {
+  ObjectMapper objectMapper = new ObjectMapper();
+  objectMapper.registerModule(new JavaTimeModule())
+          .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+
+  return objectMapper.writeValueAsString(this);
+}
+```
+
+Este método converte o objeto `Usuario` em uma string JSON.

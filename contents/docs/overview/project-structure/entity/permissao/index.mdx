@@ -1,0 +1,34 @@
+---
+title: Permissao
+description: Esta seção descreve a entidade Permissao, que representa uma permissão no sistema.
+---
+
+## Estrutura da Entidade
+
+A entidade **Permissao** representa uma permissão no sistema. Ela contém informações como o nome da permissão e o módulo ao qual pertence.
+
+### Anotações
+
+- `@Getter` e `@Setter`: Geram automaticamente os métodos getters e setters para os campos da entidade.
+- `@Entity`: Indica que a classe é uma entidade JPA.
+- `@Table(name = "permissao")`: Especifica o nome da tabela no banco de dados.
+- `@Audited` e `@AuditTable("permissao_aud")`: Habilitam a auditoria para a entidade e especificam o nome da tabela de auditoria.
+
+### Campos
+
+- `id`: Identificador único da permissão.
+- `nome`: Nome da permissão.
+- `modulo`: Módulo ao qual a permissão pertence.
+
+### Métodos
+
+#### toStringMapper
+
+```java
+public String toStringMapper() throws JsonProcessingException {
+  ObjectMapper objectMapper = new ObjectMapper();
+  return objectMapper.writeValueAsString(this);
+}
+```
+
+Este método converte o objeto `Permissao` em uma string JSON.

@@ -1,0 +1,34 @@
+---
+title: Anexo
+description: Esta seção descreve a entidade Anexo, que representa um arquivo anexado no sistema.
+---
+
+## Estrutura da Entidade
+
+A entidade **Anexo** representa um arquivo anexado no sistema. Ela contém informações sobre o nome do arquivo, tipo MIME e está relacionada a outras entidades.
+
+### Anotações
+
+- `@Getter` e `@Setter`: Geram automaticamente os métodos getters e setters para os campos da entidade.
+- `@Entity`: Indica que a classe é uma entidade JPA.
+- `@Table(name = "anexo")`: Especifica o nome da tabela no banco de dados.
+- `@Audited` e `@AuditTable("anexo_aud")`: Habilitam a auditoria para a entidade e especificam o nome da tabela de auditoria.
+- `@NoArgsConstructor`: Gera um construtor sem argumentos.
+
+### Campos
+
+- `id`: Identificador único do anexo.
+- `nome`: Nome do arquivo anexado.
+- `tipo`: Tipo MIME do arquivo.
+- `pessoaPerfilAnexo`: Relacionamento um-para-um com a entidade `PessoaPerfilAnexo`.
+
+### Construtor
+
+```java
+public Anexo(AnexoRequestDto request) {
+  nome = request.getNome().trim();
+  tipo = request.getTipo();
+}
+```
+
+Este construtor inicializa um objeto `Anexo` com base nos dados fornecidos em um `AnexoRequestDto`.

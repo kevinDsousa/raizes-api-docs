@@ -1,0 +1,38 @@
+---
+title: Vinculo
+description: Esta seção descreve a entidade Vinculo, que representa o vínculo de uma pessoa com a organização no sistema.
+---
+
+## Estrutura da Entidade
+
+A entidade **Vinculo** representa o vínculo de uma pessoa com a organização no sistema. Ela contém informações sobre o cadastro no SECAF, serviços de ATER e oferta na CEASA.
+
+### Anotações
+
+- `@Getter` e `@Setter`: Geram automaticamente os métodos getters e setters para os campos da entidade.
+- `@Entity`: Indica que a classe é uma entidade JPA.
+- `@Table(name = "vinculo")`: Especifica o nome da tabela no banco de dados.
+- `@Audited` e `@AuditTable("vinculo_aud")`: Habilitam a auditoria para a entidade e especificam o nome da tabela de auditoria.
+- `@NoArgsConstructor`: Gera um construtor sem argumentos.
+- `@JsonIgnore`: Ignora a serialização do campo `pessoaPerfil`.
+
+### Campos
+
+- `id`: Identificador único do vínculo.
+- `isCadastroSecaf`: Indica se a pessoa está cadastrada no SECAF.
+- `isServicosAter`: Indica se a pessoa utiliza serviços de ATER.
+- `isOfertaCeasa`: Indica se a pessoa oferta produtos na CEASA.
+- `pessoaPerfil`: Perfil da pessoa associado ao vínculo.
+
+### Construtor
+
+```java
+public Vinculo(VinculoRequestDto request, PessoaPerfil pessoaPerfil) {
+  isCadastroSecaf = request.isCadastroSecaf();
+  isServicosAter = request.isServicosAter();
+  isOfertaCeasa = request.isOfertaCeasa();
+  this.pessoaPerfil = pessoaPerfil;
+}
+```
+
+Este construtor inicializa um objeto `Vinculo` com base nos dados fornecidos em um `VinculoRequestDto`.

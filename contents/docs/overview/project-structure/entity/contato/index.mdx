@@ -1,0 +1,68 @@
+---
+title: Contato
+description: Esta seção descreve a entidade Contato, que representa as informações de contato de um usuário no sistema.
+---
+
+## Estrutura da Entidade
+
+A entidade **Contato** representa as informações de contato de um usuário no sistema. Ela contém informações sobre a preferência de contato, número de contato, número de WhatsApp, e-mail e se o usuário deseja receber newsletters.
+
+### Anotações
+
+- `@Getter` e `@Setter`: Geram automaticamente os métodos getters e setters para os campos da entidade.
+- `@Entity`: Indica que a classe é uma entidade JPA.
+- `@Table(name = "contato")`: Especifica o nome da tabela no banco de dados.
+- `@Audited` e `@AuditTable("contato_aud")`: Habilitam a auditoria para a entidade e especificam o nome da tabela de auditoria.
+- `@NoArgsConstructor`: Gera um construtor sem argumentos.
+
+### Campos
+
+- `id`: Identificador único do contato.
+- `preferenciaContato`: Preferência de contato do usuário (enum `TipoContato`).
+- `numeroContato`: Número de contato do usuário.
+- `numeroWhatsapp`: Número de WhatsApp do usuário.
+- `email`: E-mail do usuário.
+- `isNewsletter`: Indica se o usuário deseja receber newsletters.
+
+### Construtor
+
+```java
+public Contato(ContatoRequestDto request) {
+  preferenciaContato = request.getPreferenciaContato();
+  numeroContato = request.getNumeroContato();
+  numeroWhatsapp = request.getNumeroWhatsapp();
+  email = request.getEmail();
+  isNewsletter = request.isNewsletter();
+}
+```
+
+Este construtor inicializa um objeto `Contato` com base nos dados fornecidos em um `ContatoRequestDto`.
+
+### Métodos
+
+#### validarMudancaUpdateCodigo
+
+```java
+public boolean validarMudancaUpdateCodigo(ContatoUpdateRequestDto request) {
+  if (!preferenciaContato.equals(request.getPreferenciaContato())) {
+    return true;
+  }
+  return TipoContato.EMAIL.equals(request.getPreferenciaContato())
+          ? !Objects.equals(email, request.getEmail())
+          : !Objects.equals(numeroWhatsapp, request.getNumeroWhatsapp());
+}
+```
+
+Este método valida se houve mudanças nas informações de contato durante uma atualização.
+
+#### aplicarMudancaUpdateCodigo
+
+```java
+public void aplicarMudancaUpdateCodigo(ContatoUpdateRequestDto request) {
+  preferenciaContato = request.getPreferenciaContato();
+  numeroWhatsapp = ValidarDadosUtils.isNullOrStringVazia(request.getNumeroWhatsapp()) ? numeroWhatsapp : request.getNumeroWhatsapp();
+  email = ValidarDadosUtils.isNullOrStringVazia(request.getEmail()) ? email : request.getEmail();
+}
+```
+
+Este método aplica as mudanças nas informações de contato durante uma atualização.

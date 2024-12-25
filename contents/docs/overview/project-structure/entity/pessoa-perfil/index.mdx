@@ -1,0 +1,51 @@
+---
+title: PessoaPerfil
+description: Esta seção descreve a entidade de perfil de pessoa da aplicação, que é responsável por armazenar os dados de perfil dos usuários.
+---
+
+## Estrutura da Entidade
+
+A entidade **PessoaPerfil** representa o perfil de uma pessoa no sistema. Ela contém informações como tipo de usuário, documento, dados pessoais, contato, endereço, vínculo, presidente e anexos.
+
+### Anotações
+
+- `@Getter` e `@Setter`: Geram automaticamente os métodos getters e setters para os campos da entidade.
+- `@Entity`: Indica que a classe é uma entidade JPA.
+- `@Table(name = "pessoa_perfil")`: Especifica o nome da tabela no banco de dados.
+- `@Audited` e `@AuditTable("pessoa_perfil_aud")`: Habilitam a auditoria para a entidade e especificam o nome da tabela de auditoria.
+- `@NoArgsConstructor`: Gera um construtor sem argumentos.
+- `@JsonIgnore`: Ignora a serialização do campo `usuario`.
+
+### Campos
+
+- `id`: Identificador único do perfil.
+- `tipoUsuario`: Tipo de usuário (enum `TipoUsuario`).
+- `documento`: Documento do usuário.
+- `dadosPessoaId`: Identificador dos dados pessoais.
+- `usuario`: Usuário associado ao perfil.
+- `contato`: Contato associado ao perfil.
+- `endereco`: Endereço associado ao perfil.
+- `vinculo`: Vínculo associado ao perfil.
+- `presidente`: Presidente associado ao perfil.
+- `pessoaPerfilAnexo`: Lista de anexos associados ao perfil.
+
+### Construtores
+
+```java
+public PessoaPerfil(PessoaPerfilRequestDto request, Usuario usuario, UUID dadosPessoaId) {
+  this(request, usuario, dadosPessoaId, null);
+}
+
+public PessoaPerfil(PessoaPerfilRequestDto request, Usuario usuario, UUID dadosPessoaId, UUID idDadosPessoaisPresidente) {
+  tipoUsuario = request.getTipoUsuario();
+  documento = request.getDocumento();
+  this.dadosPessoaId = dadosPessoaId;
+  this.usuario = usuario;
+  contato = new Contato(request.getContato());
+  endereco = new Endereco(request.getEndereco());
+  vinculo = Objects.nonNull(request.getVinculo()) ? new Vinculo(request.getVinculo(), this) : null;
+  presidente = Objects.nonNull(idDadosPessoaisPresidente) ? new Presidente(request.getPresidente(), this, idDadosPessoaisPresidente) : null;
+}
+```
+
+Estes construtores inicializam um objeto `PessoaPerfil` com base nos dados fornecidos em um `PessoaPerfilRequestDto`.

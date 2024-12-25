@@ -1,0 +1,36 @@
+---
+title: CodigoVerificacao
+description: Esta seção descreve a entidade de código de verificação da aplicação, que é responsável por armazenar os códigos de verificação enviados aos usuários.
+---
+
+## Estrutura da Entidade
+
+A entidade **CodigoVerificacao** representa um código de verificação no sistema. Ela contém informações sobre o código, tipo de código, validade e data de expiração.
+
+### Anotações
+
+- `@Getter` e `@Setter`: Geram automaticamente os métodos getters e setters para os campos da entidade.
+- `@Entity`: Indica que a classe é uma entidade JPA.
+- `@Table(name = "codigo_verificacao")`: Especifica o nome da tabela no banco de dados.
+- `@NoArgsConstructor` e `@AllArgsConstructor`: Geram construtores sem argumentos e com todos os argumentos, respectivamente.
+- `@JsonIgnore`: Ignora a serialização do campo `dataExpiracao`.
+
+### Campos
+
+- `id`: Identificador único do código de verificação.
+- `codigo`: Código de verificação.
+- `tipoCodigo`: Tipo do código de verificação (enum `TipoCodigoVerificacao`).
+- `isValido`: Indica se o código foi validado.
+- `dataExpiracao`: Data de expiração do código de verificação.
+
+### Construtor
+
+```java
+public CodigoVerificacao(String codigo, LocalDateTime dataExpiracao, TipoCodigoVerificacao tipo) {
+  this.codigo = codigo;
+  this.dataExpiracao = dataExpiracao;
+  tipoCodigo = tipo;
+}
+```
+
+Este construtor inicializa um objeto `CodigoVerificacao` com base nos dados fornecidos.

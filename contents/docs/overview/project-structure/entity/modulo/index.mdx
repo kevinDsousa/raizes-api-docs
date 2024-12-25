@@ -1,0 +1,33 @@
+---
+title: Modulo
+description: Esta seção descreve a entidade Modulo, que representa um módulo do sistema.
+---
+
+## Estrutura da Entidade
+
+A entidade **Modulo** representa um módulo do sistema. Ela contém informações como o nome do módulo.
+
+### Anotações
+
+- `@Getter` e `@Setter`: Geram automaticamente os métodos getters e setters para os campos da entidade.
+- `@Entity`: Indica que a classe é uma entidade JPA.
+- `@Table(name = "modulo")`: Especifica o nome da tabela no banco de dados.
+- `@Audited` e `@AuditTable("modulo_aud")`: Habilitam a auditoria para a entidade e especificam o nome da tabela de auditoria.
+
+### Campos
+
+- `id`: Identificador único do módulo.
+- `nome`: Nome do módulo.
+
+### Métodos
+
+#### toStringMapper
+
+```java
+public String toStringMapper() throws JsonProcessingException {
+  ObjectMapper objectMapper = new ObjectMapper();
+  return objectMapper.writeValueAsString(this);
+}
+```
+
+Este método converte o objeto `Modulo` em uma string JSON.

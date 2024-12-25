@@ -1,0 +1,43 @@
+---
+title: Presidente
+description: Esta seção descreve a entidade Presidente, que representa o presidente de uma organização no sistema.
+---
+
+## Estrutura da Entidade
+
+A entidade **Presidente** representa o presidente de uma organização no sistema. Ela contém informações como documento, dados pessoais, contato, data de início e fim do mandato, e o perfil da pessoa.
+
+### Anotações
+
+- `@Getter` e `@Setter`: Geram automaticamente os métodos getters e setters para os campos da entidade.
+- `@Entity`: Indica que a classe é uma entidade JPA.
+- `@Table(name = "presidente")`: Especifica o nome da tabela no banco de dados.
+- `@Audited` e `@AuditTable("presidente_aud")`: Habilitam a auditoria para a entidade e especificam o nome da tabela de auditoria.
+- `@NoArgsConstructor`: Gera um construtor sem argumentos.
+- `@JsonIgnore`: Ignora a serialização do campo `pessoaPerfil`.
+- `@JsonDeserialize` e `@JsonSerialize`: Especificam os deserializadores e serializadores para os campos de data.
+
+### Campos
+
+- `id`: Identificador único do presidente.
+- `documento`: Documento do presidente.
+- `dadosPessoaId`: Identificador dos dados pessoais.
+- `contato`: Contato do presidente.
+- `dataInicioMandato`: Data de início do mandato.
+- `dataFinalMandato`: Data de fim do mandato.
+- `pessoaPerfil`: Perfil da pessoa associada ao presidente.
+
+### Construtor
+
+```java
+public Presidente(PresidenteRequestDto request, PessoaPerfil pessoaPerfil, UUID idDadosPessoaisPresidente) {
+  documento = request.getDocumento();
+  dataInicioMandato = request.getDataInicioMandato();
+  dataFinalMandato = request.getDataFinalMandato();
+  dadosPessoaId = idDadosPessoaisPresidente;
+  this.pessoaPerfil = pessoaPerfil;
+  contato = new Contato(request.getContato());
+}
+```
+
+Este construtor inicializa um objeto `Presidente` com base nos dados fornecidos em um `PresidenteRequestDto`.

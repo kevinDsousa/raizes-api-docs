@@ -1,0 +1,35 @@
+---
+title: PessoaPerfilAnexo
+description: Esta seção descreve a entidade PessoaPerfilAnexo, que representa um anexo associado ao perfil de uma pessoa no sistema.
+---
+
+## Estrutura da Entidade
+
+A entidade **PessoaPerfilAnexo** representa um anexo associado ao perfil de uma pessoa no sistema. Ela contém informações como o tipo de documento, o perfil da pessoa e o anexo.
+
+### Anotações
+
+- `@Getter` e `@Setter`: Geram automaticamente os métodos getters e setters para os campos da entidade.
+- `@Entity`: Indica que a classe é uma entidade JPA.
+- `@Table(name = "pessoa_perfil_anexo")`: Especifica o nome da tabela no banco de dados.
+- `@Audited` e `@AuditTable("pessoa_perfil_anexo_aud")`: Habilitam a auditoria para a entidade e especificam o nome da tabela de auditoria.
+- `@NoArgsConstructor`: Gera um construtor sem argumentos.
+- `@JsonIgnore`: Ignora a serialização do campo `pessoaPerfil`.
+
+### Campos
+
+- `id`: Identificador único do anexo do perfil.
+- `pessoaPerfil`: Perfil da pessoa associado ao anexo.
+- `anexo`: Anexo associado ao perfil.
+- `tipoDocumento`: Tipo de documento (enum `TipoDocumento`).
+
+### Construtor
+
+```java
+public PessoaPerfilAnexo(AnexoRequestDto request, Usuario usuario) {
+  tipoDocumento = request.getTipoDocumento();
+  pessoaPerfil = usuario.getPessoaPerfil();
+}
+```
+
+Este construtor inicializa um objeto `PessoaPerfilAnexo` com base nos dados fornecidos em um `AnexoRequestDto`.

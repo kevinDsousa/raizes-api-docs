@@ -1,0 +1,44 @@
+---
+title: DadosPessoaJuridica
+description: Esta seção descreve a entidade de dados pessoais de pessoa jurídica da aplicação, que é responsável por armazenar os dados pessoais das empresas.
+---
+
+## Estrutura da Entidade
+
+A entidade **DadosPessoaJuridica** representa as informações pessoais de uma pessoa jurídica no sistema. Ela contém informações como razão social, nome fantasia, registro na junta comercial, inscrição estadual, data de fundação, CAF e data de validade do CAF.
+
+### Anotações
+
+- `@Getter` e `@Setter`: Geram automaticamente os métodos getters e setters para os campos da entidade.
+- `@Entity`: Indica que a classe é uma entidade JPA.
+- `@Table(name = "dados_pessoa_juridica")`: Especifica o nome da tabela no banco de dados.
+- `@Audited` e `@AuditTable("dados_pessoa_juridica_aud")`: Habilitam a auditoria para a entidade e especificam o nome da tabela de auditoria.
+- `@NoArgsConstructor`: Gera um construtor sem argumentos.
+- `@JsonDeserialize` e `@JsonSerialize`: Especificam os deserializadores e serializadores para os campos de data.
+
+### Campos
+
+- `id`: Identificador único dos dados pessoais.
+- `razaoSocial`: Razão social da empresa.
+- `nomeFantasia`: Nome fantasia da empresa.
+- `registroJuntaComercial`: Registro na junta comercial.
+- `inscricaoEstadual`: Inscrição estadual.
+- `dataFundacao`: Data de fundação da empresa.
+- `caf`: Código CAF da empresa.
+- `dataValidadeCaf`: Data de validade do código CAF.
+
+### Construtor
+
+```java
+public DadosPessoaJuridica(DadosPessoaJuridicaRequestDto request) {
+  razaoSocial = request.getRazaoSocial();
+  nomeFantasia = request.getNomeFantasia();
+  registroJuntaComercial = request.getRegistroJuntaComercial();
+  inscricaoEstadual = request.getInscricaoEstadual();
+  dataFundacao = request.getDataFundacao();
+  caf = request.getCaf();
+  dataValidadeCaf = request.getDataValidadeCaf();
+}
+```
+
+Este construtor inicializa um objeto `DadosPessoaJuridica` com base nos dados fornecidos em um `DadosPessoaJuridicaRequestDto`.

@@ -60,6 +60,7 @@ export const ROUTES: EachRoute[] = [
               { title: "Modulo", href: "/modulo" },
               { title: "Permissao", href: "/permissao" },
               { title: "PessoaPerfil", href: "/pessoa-perfil" },
+              { title: "Perfil Acesso", href: "/perfil-acesso" },
               { title: "PessoaPerfilAnexo", href: "/pessoa-perfil-anexo" },
               { title: "Presidente", href: "/presidente" },
               { title: "Vinculo", href: "/vinculo" },
