@@ -1,6 +1,78 @@
 ---
-title: Components
-description: This section provides an overview of the custom components available in AriaDocs.
+title: Termo e Condição Controller
+description: Este endpoint permite obter o termo e condição da aplicação vigente.
 ---
 
-d
+# Termo e Condição Controller
+
+## Visão Geral
+
+O **Termo e Condição Controller** é responsável por disponibilizar um endpoint que retorna os termos e condições vigentes da aplicação. Este recurso garante que os usuários possam acessar as informações atualizadas sobre os termos de uso.
+
+---
+
+## Implementação
+
+### Endpoint: `/termo-condicao/consulta`
+
+- **Método HTTP**: `GET`
+- **Descrição**: Retorna os termos e condições da aplicação, juntamente com uma mensagem de sucesso.
+- **Resposta**:
+  - **Status HTTP**: `200 OK`
+  - **Corpo**: Um objeto JSON contendo os dados do termo e condições e uma mensagem padrão de sucesso.
+
+---
+
+### Código-Fonte
+
+Abaixo está a implementação do controller:
+
+```java
+@RestController
+@RequestMapping(value = "termo-condicao")
+@RequiredArgsConstructor
+public class TermoCondicaoControllerImpl implements TermoCondicaoController {
+  private final TermoCondicaoService termoCodicaoService;
+
+  @Override
+  @GetMapping(value = "/consulta")
+  public ResponseEntity<?> pegarTermoCondicao() {
+    termoCodicaoService.pegarTermoCondicao();
+    return ResponseEntity.status(HttpStatus.OK).body(ResponseDto.fromData(
+        termoCodicaoService.pegarTermoCondicao(),
+        HttpStatus.OK,
+        MessageCommonsConstants.MENSAGEM_CONSULTA_TODOS_SUCESSO
+    ));
+  }
+}
+```
+
+## Como Utilizar
+
+### Chamando o Endpoint
+
+Para consultar os termos e condições vigentes, envie uma requisição `GET` para o seguinte endpoint:
+
+`GET /termo-condicao/consulta`
+
+### Exemplo de Resposta
+
+```json
+{
+  "data": {
+    "termoCondicao": "Os termos e condições atualizados..."
+  },
+  "status": "OK",
+  "message": "Consulta realizada com sucesso."
+}
+```
+
+### Benefícios
+
+- Facilidade de Acesso: Proporciona aos usuários um meio simples de acessar os termos e condições.
+- Mensagens Padrão: Utiliza uma mensagem de sucesso padronizada para consistência nas respostas.
+- Integração com Serviços: Centraliza a lógica de obtenção dos termos no serviço `TermoCondicaoService`, mantendo o controller mais limpo.
+
+--- 
+
+Este controller facilita a disponibilização de informações atualizadas dos termos e condições aos usuários.
